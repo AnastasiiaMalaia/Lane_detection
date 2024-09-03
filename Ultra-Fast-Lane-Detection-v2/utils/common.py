@@ -211,7 +211,7 @@ def inference_culane_tusimple(net, data_label):
                 'cls_out_col_ext_label':cls_out_col_ext_label, 'labels_row_float':data_label['labels_row_float'], 'labels_col_float':data_label['labels_col_float'] }
     if 'seg_out' in pred.keys():
         res_dict['seg_out'] = pred['seg_out']
-        res_dict['seg_label'] = data_label['seg_images']
+        res_dict['seg_label'] = data_label['seg_images'].long()
 
     return res_dict
 def inference_curvelanes(net, data_label):

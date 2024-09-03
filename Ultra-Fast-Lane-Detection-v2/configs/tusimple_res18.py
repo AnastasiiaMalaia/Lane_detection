@@ -1,5 +1,5 @@
 dataset= 'Tusimple'
-data_root= '' # Need to be modified before running
+data_root= '/home/anamaly/TUSimple' # Need to be modified before running
 epoch= 100
 batch_size= 32
 optimizer= 'SGD'
@@ -17,7 +17,7 @@ use_aux= False
 sim_loss_w= 0.0
 shp_loss_w= 0.0
 note= ''
-log_path= ''
+log_path= '/home/anamaly/Lane_detection/Ultra-Fast-Lane-Detection-v2/log_path/tusimple_nopretrain_without_aux'
 finetune= None
 resume= None
 test_model= ''

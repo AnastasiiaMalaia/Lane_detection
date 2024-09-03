@@ -1,0 +1,3 @@
+eval "$(/home/anamaly/Lane_detection/Ultra-Fast-Lane-Detection-v2/exit/bin/conda shell.posix hook)"
+conda activate  /home/anamaly/Lane_detection/Ultra-Fast-Lane-Detection-v2/exit
+/home/anamaly/Lane_detection/Ultra-Fast-Lane-Detection-v2/exit/bin/python3.12 -Wi -m compileall -q -l -i /home/anamaly/Lane_detection/Ultra-Fast-Lane-Detection-v2/exit/install_tmp/tmpdee7kt7c -j 0

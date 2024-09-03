@@ -90,7 +90,7 @@ def generate_segmentation_and_train_list(root, line_txt, names):
 
         label_path = names[i][:-3]+'png'
         label = np.zeros((720,1280),dtype=np.uint8)
-        all_points = np.zeros((4,56,2), dtype=np.float)
+        all_points = np.zeros((4,56,2), dtype=np.float64)
         the_anno_row_anchor = np.array([160, 170, 180, 190, 200, 210, 220, 230, 240, 250, 260,
        270, 280, 290, 300, 310, 320, 330, 340, 350, 360, 370,
        380, 390, 400, 410, 420, 430, 440, 450, 460, 470, 480,
@@ -169,9 +169,9 @@ def generate_segmentation_and_train_list(root, line_txt, names):
             bin_label[3] = 1
 
         cv2.imwrite(os.path.join(root,label_path),label)
-
-        cache_dict[names[i]] = all_points.tolist()
-        train_gt_fp.write(names[i] + ' ' + label_path + ' '+' '.join(list(map(str,bin_label))) + '\n')
+        new_name = "train_set/"+names[i]
+        cache_dict[new_name] = all_points.tolist()
+        train_gt_fp.write("train_set/" + names[i] + ' ' + "train_set/"+label_path + ' '+' '.join(list(map(str,bin_label))) + '\n')
     train_gt_fp.close()
     with open(os.path.join(root, 'tusimple_anno_cache.json'), 'w') as f:
         json.dump(cache_dict, f)
@@ -185,14 +185,14 @@ if __name__ == "__main__":
     args = get_args().parse_args()
 
     # training set
-    names,line_txt = get_tusimple_list(args.root,  ['label_data_0601.json','label_data_0531.json','label_data_0313.json'])
+    names,line_txt = get_tusimple_list(args.root,  ['train_set/label_data_0601.json','train_set/label_data_0531.json','train_set/label_data_0313.json'])
     # generate segmentation and training list for training
     generate_segmentation_and_train_list(args.root, line_txt, names)
 
     # testing set
-    names,line_txt = get_tusimple_list(args.root, ['test_tasks_0627.json'])
+    names,line_txt = get_tusimple_list(args.root, ['test_set/test_tasks_0627.json'])
     # generate testing set for testing
     with open(os.path.join(args.root,'test.txt'),'w') as fp:
         for name in names:
-            fp.write(name + '\n')
+            fp.write('test_set/' + name + '\n')
 

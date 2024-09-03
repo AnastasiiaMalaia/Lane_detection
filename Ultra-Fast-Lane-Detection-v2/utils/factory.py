@@ -51,6 +51,7 @@ def get_loss_dict(cfg):
     if cfg.use_aux:
         loss_dict['name'].append('seg_loss')
         loss_dict['op'].append(torch.nn.CrossEntropyLoss(weight = torch.tensor([0.6, 1., 1., 1., 1.])).cuda())
+        # loss_dict['op'].append(torch.nn.CrossEntropyLoss())
         loss_dict['weight'].append(1.0)
         loss_dict['data_src'].append(('seg_out', 'seg_label'))
 

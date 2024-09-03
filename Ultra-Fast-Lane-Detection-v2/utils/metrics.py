@@ -17,6 +17,7 @@ class Metric_mIoU():
         self.class_num = class_num
         self.hist = np.zeros((self.class_num,self.class_num))
     def update(self,predict,target):
+        # predict = predict.argmax(1)
         predict,target = converter(predict),converter(target)
 
         self.hist += fast_hist(predict,target,self.class_num)

@@ -149,21 +149,19 @@ def ExternalSourceTrainPipeline(batch_size, num_threads, device_id, external_dat
         size = encoded_images_sizes(jpegs)
         center = size / 2
 
-        mt = fn.transforms.scale(scale = fn.random.uniform(range=(0.8, 1.2), shape=[2]), center = center)
-        mt = fn.transforms.rotation(mt, angle = fn.random.uniform(range=(-6, 6)), center = center)
+        # mt = fn.transforms.scale(scale = fn.random.uniform(range=(0.8, 1.2), shape=[2]), center = center)
+        # mt = fn.transforms.rotation(mt, angle = fn.random.uniform(range=(-6, 6)), center = center)
 
-        off = fn.cat(fn.random.uniform(range=(-200, 200), shape = [1]), fn.random.uniform(range=(-100, 100), shape = [1]))
-        mt = fn.transforms.translation(mt, offset = off)
+        # off = fn.cat(fn.random.uniform(range=(-200, 200), shape = [1]), fn.random.uniform(range=(-100, 100), shape = [1]))
+        # mt = fn.transforms.translation(mt, offset = off)
 
-        images = fn.warp_affine(images, matrix = mt, fill_value=0, inverse_map=False)
-        seg_images = fn.warp_affine(seg_images, matrix = mt, fill_value=0, inverse_map=False)
-        labels = fn.coord_transform(labels.gpu(), MT = mt)
-
+        # images = fn.warp_affine(images, matrix = mt, fill_value=0, inverse_map=False)
+        # seg_images = fn.warp_affine(seg_images, matrix = mt, fill_value=0, inverse_map=False)
+        # labels = fn.coord_transform(labels.gpu(), MT = mt)
 
         images = fn.resize(images, resize_x=train_width, resize_y=int(train_height/top_crop))
         seg_images = fn.resize(seg_images, resize_x=train_width, resize_y=int(train_height/top_crop), interp_type=types.INTERP_NN)
-
-
+        labels = labels.gpu()
         images = fn.crop_mirror_normalize(images, 
                                             dtype=types.FLOAT, 
                                             mean = [0.485 * 255, 0.456 * 255, 0.406 * 255],
