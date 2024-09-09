@@ -1,5 +1,5 @@
 dataset='CurveLanes'
-data_root= '' # Need to be modified before running
+data_root= '/home/anamaly/Curvelanes' # Need to be modified before running
 epoch=50
 batch_size=8
 optimizer='SGD'
@@ -16,7 +16,7 @@ backbone='18'
 sim_loss_w=1.0
 shp_loss_w=0.0
 note=''
-log_path=''
+log_path='/home/anamaly/Lane_detection/Ultra-Fast-Lane-Detection-v2/log_path/curvelane_wit_aux'
 finetune=None
 resume=None
 test_model=''
