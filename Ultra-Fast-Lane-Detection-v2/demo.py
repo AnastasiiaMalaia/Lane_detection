@@ -98,6 +98,8 @@ if __name__ == "__main__":
         datasets = [LaneTestDataset(cfg.data_root,os.path.join(cfg.data_root, split),img_transform = img_transforms, crop_size = cfg.train_height) for split in splits]
         img_w, img_h = 1280, 720
     else:
+        dataset = VideoFramesDataset('path/to/output/folder', transform=transform)
+        dataloader = torch.utils.data.DataLoader(dataset, batch_size=32, shuffle=True)
         raise NotImplementedError
     for split, dataset in zip(splits, datasets):
         loader = torch.utils.data.DataLoader(dataset, batch_size=1, shuffle = False, num_workers=1)

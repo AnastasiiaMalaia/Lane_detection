@@ -1,0 +1,6 @@
+file: /home/anamaly/Lane_detection/Ultra-Fast-Lane-Detection-v2/log_path/culane_res18/20240911_121105_lr_5e-02_b_32/txt/out2_hlight.txt
+tp: 880 fp: 646 fn: 805
+precision: 0.576671
+recall: 0.522255
+Fmeasure: 0.548116
+

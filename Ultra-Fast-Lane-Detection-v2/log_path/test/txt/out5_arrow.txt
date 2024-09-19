@@ -1,0 +1,6 @@
+file: /home/anamaly/Lane_detection/Ultra-Fast-Lane-Detection-v2/log_path/test/txt/out5_arrow.txt
+tp: 2738 fp: 323 fn: 444
+precision: 0.894479
+recall: 0.860465
+Fmeasure: 0.877142
+

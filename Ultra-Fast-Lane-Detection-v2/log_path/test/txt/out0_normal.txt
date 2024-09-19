@@ -1,0 +1,6 @@
+file: /home/anamaly/Lane_detection/Ultra-Fast-Lane-Detection-v2/log_path/test/txt/out0_normal.txt
+tp: 30074 fp: 2546 fn: 2703
+precision: 0.92195
+recall: 0.917534
+Fmeasure: 0.919736
+

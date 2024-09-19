@@ -1,0 +1,6 @@
+file: /home/anamaly/Lane_detection/Ultra-Fast-Lane-Detection-v2/log_path/culane_res18/20240911_121105_lr_5e-02_b_32/txt/out1_crowd.txt
+tp: 17816 fp: 8591 fn: 10187
+precision: 0.67467
+recall: 0.636218
+Fmeasure: 0.65488
+

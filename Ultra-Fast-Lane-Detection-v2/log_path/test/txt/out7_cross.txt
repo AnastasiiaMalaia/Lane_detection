@@ -1,0 +1,6 @@
+file: /home/anamaly/Lane_detection/Ultra-Fast-Lane-Detection-v2/log_path/test/txt/out7_cross.txt
+tp: 0 fp: 1993 fn: 0
+precision: 0
+recall: -1
+Fmeasure: 0
+

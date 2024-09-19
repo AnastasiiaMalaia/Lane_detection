@@ -1,0 +1,6 @@
+file: /home/anamaly/Lane_detection/Ultra-Fast-Lane-Detection-v2/log_path/culane_res18/20240912_065923_lr_5e-02_b_32/txt/out5_arrow.txt
+tp: 2625 fp: 499 fn: 557
+precision: 0.840269
+recall: 0.824953
+Fmeasure: 0.83254
+

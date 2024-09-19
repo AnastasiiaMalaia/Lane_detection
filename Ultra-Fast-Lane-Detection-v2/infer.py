@@ -5,7 +5,8 @@ from utils.common import merge_config, get_model
 import tqdm
 import torchvision.transforms as transforms
 from data.dataset import LaneTestDataset
-import time                                      #DEBUG:
+import time
+import matplotlib.pyplot as plt                                      #DEBUG:
 
 def pred2coords(pred, row_anchor, col_anchor, local_width = 1, original_image_width = 1640, original_image_height = 590):
     batch_size, num_grid_row, num_cls_row, num_lane_row = pred['loc_row'].shape
@@ -92,7 +93,8 @@ if __name__ == "__main__":
         transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
     ])
 
-    pathname = "/home/anamaly/TUSimple/test_set/clips/0601/1494452431571697487" # Dir of imgs to be detected
+    pathname = "/home/anamaly/Lane_detection/test_data/Marking_dataset_resized" # Dir of imgs to be detected
+    # pathname = "/home/anamaly/Lane_detection/New_imgs"
     imgs_path = os.listdir(pathname)
     i = 0
     for imgname in imgs_path:
@@ -103,7 +105,7 @@ if __name__ == "__main__":
             img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
             img_h, img_w = img.shape[0], img.shape[1]
             img = img_transforms(img)
-            img = img[:, -cfg.train_height:, :]
+            img = img[:, -cfg.train_height:, :] 
             img = img.to('cuda:0')
             img = torch.unsqueeze(img, 0)
 
@@ -114,11 +116,23 @@ if __name__ == "__main__":
 
             # print(coords)
             # break
+
+            ### lane colors
+            # Задаем цвета для каждой линии
+
+            # Импортируем палитру из matplotlib
+            cmap = plt.get_cmap('prism')  # используем палитру 'tab20' из SSZ colormaps
+            num_lanes = len(coords)
+            colors = [cmap(i / num_lanes)[:3] for i in range(num_lanes)]  # Генерируем цвета
+            colors = [(int(r * 255), int(g * 255), int(b * 255)) for r, g, b in colors]  # Преобразуем в RGB (0-255)
+
+
             finish = time.time()   ### DEBUG:
-            for lane in coords:
+            for lane_idx, lane in enumerate(coords):
+                color = colors[lane_idx]  # Получаем цвет для текущей линии
                 for coord in lane:
-                    cv2.circle(im0, coord, 5, (0, 255, 0), -1)
-            resname = "/home/anamaly/Lane_detection/test/extra_aux/" + imgname  # Dir of inference result
+                    cv2.circle(im0, coord, 5, color, -1)  # Используем индивидуальный цвет для каждой линии
+            resname = "/home/anamaly/Lane_detection/test_data/own_tusimple_18_marking_dataset_detected_resized/" + imgname  # Dir of inference result
             cv2.imwrite(resname, im0)
             # res = finish - start
             # res_msec = res * 1000
